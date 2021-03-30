@@ -1,0 +1,15 @@
+apply plugin: 'com.android.library'
+
+apply from: rootProject.file('base.gradle')
+
+
+dependencies {
+    implementation project(":base")
+    api (depend.material)
+    api (depend.constraint_layout)
+    api (depend.recyclerview)
+    api (depend.transition)
+    api (depend.viewmodel2)
+    api (depend.toast)
+    api (depend.loading)
+}

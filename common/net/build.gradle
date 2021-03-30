@@ -1,0 +1,12 @@
+apply plugin: 'com.android.library'
+
+apply from: rootProject.file('base.gradle')
+
+
+dependencies {
+    implementation project(":base")
+    api(depend.okhttp)
+    api(depend.retrofit)
+    api(depend.retrofit_gson)
+    api(depend.retrofit_coroutines)
+}

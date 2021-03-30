@@ -1,11 +1,9 @@
 # 2021本科毕业设计
 ## mainTechnique
-***
 ### -Android
 ### -OpenGLES
 ### -FFmpeg
 ### -Google_ML
-***
 ```
 MIT License
 

@@ -1,2 +1,9 @@
 include ':app'
+include ':base'
+include ':common:net'
+include ':common:database'
+include ':common:component'
+include ':common:gl_shader'
+include ':common:video_codec'
+include ':common:common'
 rootProject.name = "Magician"

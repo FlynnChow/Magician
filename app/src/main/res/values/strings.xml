@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Magician</string>
+    <string name="home_tab_1">照片</string>
+    <string name="home_tab_2">相册</string>
+    <string name="home_tab_3">故事</string>
+    <string name="home_tab_4">设置</string>
 </resources>

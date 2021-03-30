@@ -1,0 +1,22 @@
+apply plugin: 'com.android.library'
+
+apply from: rootProject.file('base.gradle')
+
+
+dependencies {
+    api(depend.appcompat)
+    api(depend.kotlin_stdlib)
+    api(depend.core_ktx)
+    api(depend.glide)
+    api(depend.viewmodel)
+    api(depend.livedata)
+    api(depend.viewmodel_savedata)
+    api(depend.lifecycle_server)
+    api(depend.datastore)
+    api(depend.eventbus)
+
+    testImplementation(testDepend.junit)
+
+    androidTestImplementation(androidTestDepend.junit)
+    androidTestImplementation(androidTestDepend.espresso_core)
+}

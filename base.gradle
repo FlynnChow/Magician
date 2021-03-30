@@ -1,0 +1,45 @@
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-kapt'
+
+final appConfig = rootProject.ext.appConfig
+final depend = rootProject.ext.depend
+final testDepend = rootProject.ext.testDepend
+final androidTestDepend = rootProject.ext.androidTestDepend
+final annotationDepend = rootProject.ext.annotationDepend
+
+android {
+    compileSdkVersion appConfig.compileSdkVersion
+    buildToolsVersion appConfig.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion appConfig.minSdkVersion
+        targetSdkVersion appConfig.targetSdkVersion
+        versionCode appConfig.versionCode
+        versionName appConfig.versionName
+        testInstrumentationRunner appConfig.testInstrumentationRunner
+        multiDexEnabled true
+        ndk {
+            abiFilters "armeabi-v7a","arm64-v8a"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = appConfig.jvmTarget
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    kapt annotationDepend.glide
+    kapt annotationDepend.room
+    kapt annotationDepend.lifecycle
+}

@@ -4,5 +4,5 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
 abstract class IBindingHolder<Binding:ViewBinding,DATA>(val mBinding:Binding):RecyclerView.ViewHolder(mBinding.root) {
-    abstract fun bindData(data: DATA?)
+    abstract fun bindData(data: DATA)
 }

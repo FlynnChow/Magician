@@ -1,7 +1,9 @@
 package com.flynnchow.zero.common.util
 
+import android.content.Context
 import android.net.Uri
 import android.os.Environment
+import androidx.annotation.RawRes
 import com.flynnchow.zero.base.BaseApplication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -11,6 +13,7 @@ import java.io.InputStream
 import java.io.OutputStream
 
 object FileUtils {
+    private const val ANDROID_RESOURCE = "android.resource://"
     object Video{
         const val MP4 = "mp4"
         const val MP4_MIME_TYPE = "video/mp4"
@@ -30,6 +33,12 @@ object FileUtils {
         const val JPG = "jpg"
         const val JPEG_MIME_TYPE = "image/jpeg"
         const val JPG_MIME_TYPE = "image/jpg"
+    }
+
+    object MediaType{
+        const val images = "images"
+        const val video = "video"
+        const val audio = "audio"
     }
 
     @JvmStatic
@@ -123,6 +132,13 @@ object FileUtils {
         dir?.run {
             deleteDirWithFile(this)
         }
+    }
+
+    @JvmStatic
+    fun getUriFromRes(resId: Int): Uri {
+        return Uri.parse(
+            ANDROID_RESOURCE + BaseApplication.instance.packageName.toString() + File.separator + resId
+        )
     }
 
     @JvmStatic

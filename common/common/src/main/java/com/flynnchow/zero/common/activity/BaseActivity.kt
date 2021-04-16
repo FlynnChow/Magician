@@ -11,11 +11,13 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.flynnchow.zero.base.helper.LogDebug
 import com.flynnchow.zero.common.proxy_api.CoroutineProxy
 import com.flynnchow.zero.common.helper.ActivityHelper
 import com.flynnchow.zero.common.proxy_impl.CoroutineProxyImpl
 import com.flynnchow.zero.common.viewmodel.BaseViewModel
 import com.hjq.toast.ToastUtils
+import com.hw.ycshareelement.YcShareElement
 
 abstract class BaseActivity(@LayoutRes private val resId: Int?) : AppCompatActivity(),
     CoroutineProxy by CoroutineProxyImpl() {
@@ -47,8 +49,8 @@ abstract class BaseActivity(@LayoutRes private val resId: Int?) : AppCompatActiv
     }
 
     @CallSuper
-    protected fun onCreateBefore() {
-
+    protected open fun onCreateBefore() {
+        YcShareElement.enableContentTransition(application)
     }
 
     protected open fun createView(@LayoutRes resId: Int) {
@@ -63,17 +65,13 @@ abstract class BaseActivity(@LayoutRes private val resId: Int?) : AppCompatActiv
     protected abstract fun onInitData(savedInstanceState: Bundle?)
 
     @CallSuper
-    protected fun onInitObserver() {
+    protected open fun onInitObserver() {
         observerError().observe(this, Observer {
-            toast(it.message)
+            showToast(it.message)
         })
     }
 
-    fun toast(msg: String?) {
-        ToastUtils.show(msg ?: "")
-    }
-
-    fun toast(msg: Any?) {
+    fun showToast(msg: Any?) {
         ToastUtils.show(msg.toString())
     }
 
@@ -90,7 +88,7 @@ abstract class BaseActivity(@LayoutRes private val resId: Int?) : AppCompatActiv
                 if(it) onBackPressed()
             })
             viewModel.toast.observe(this, Observer {
-                toast(it)
+                showToast(it)
             })
         }
         return viewModel
@@ -108,6 +106,34 @@ abstract class BaseActivity(@LayoutRes private val resId: Int?) : AppCompatActiv
         }else{
             callback?.invoke(true,request)
         }
+    }
+
+    fun requestPermissions(permissions: Array<String>,noNeedRequestCallback:(()->Unit)?,callback:((result:Boolean,permissions:List<String>)->Unit)? = null){
+        if (checkPermission(permissions)){
+            noNeedRequestCallback?.invoke()
+            LogDebug("测试","12231")
+            return
+        }
+        LogDebug("测试","122322")
+        val request = ArrayList<String>()
+        for (permission in permissions){
+            if(ActivityCompat.checkSelfPermission(this,permission) != PackageManager.PERMISSION_GRANTED)
+                request.add(permission)
+        }
+        if(request.isNotEmpty()){
+            permissionCallback = callback
+            ActivityCompat.requestPermissions(this,request.toTypedArray(),requestPermissionCode)
+        }else{
+            callback?.invoke(true,request)
+        }
+    }
+
+    fun checkPermission(permissions: Array<String>):Boolean{
+        for (permission in permissions){
+            if(ActivityCompat.checkSelfPermission(this,permission) != PackageManager.PERMISSION_GRANTED)
+                return false
+        }
+        return true
     }
 
     @CallSuper

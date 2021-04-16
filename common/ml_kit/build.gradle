@@ -1,0 +1,16 @@
+apply plugin: 'com.android.library'
+
+apply from: rootProject.file('base.gradle')
+
+android {
+    aaptOptions {
+        noCompress "tflite"
+    }
+}
+
+dependencies {
+    implementation project(":base")
+    implementation project(":common:model")
+    implementation (depend.ml_label)
+    implementation (depend.ml_custom)
+}

@@ -18,4 +18,8 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">?android:attr/windowBackground</item>
     </style>
+
+    <style name="tabBarStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">15sp</item>
+    </style>
 </resources>

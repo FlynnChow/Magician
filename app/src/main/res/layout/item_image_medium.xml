@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewData"
+            type="com.flynnchow.zero.magician.gallery.viewdata.GalleryImageData" />
+    </data>
+
+    <FrameLayout
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:background="@color/image_place_holder"
+            android:id="@+id/image"
+            app:img_medium="@{viewData.image.uri}"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"/>
+    </FrameLayout>
+</layout>

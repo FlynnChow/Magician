@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="name"
+            type="String" />
+        <variable
+            name="pageAdapter"
+            type="com.flynnchow.zero.magician.main.MainPageAdapter" />
+    </data>
+
+    <FrameLayout
+        android:onClick="@{pageAdapter::switchPage}"
+        android:id="@+id/main_tab"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            tools:text="@string/home_tab_1"
+            android:textSize="16sp"
+            android:textColor="@color/font_black_2"
+            android:id="@+id/main_tab_name"
+            android:background="@drawable/ripple_main_tab"
+            android:gravity="center"
+            android:text="@{name}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <View
+            android:id="@+id/main_indicator"
+            android:visibility="gone"
+            android:layout_marginBottom="4dp"
+            android:layout_gravity="center|bottom"
+            android:background="@drawable/shape_main_indicator"
+            android:layout_width="32dp"
+            android:layout_height="2.5dp"/>
+    </FrameLayout>
+</layout>

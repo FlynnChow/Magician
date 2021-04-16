@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewData"
+            type="com.flynnchow.zero.magician.album.viewdata.AlbumTitleData" />
+        <variable
+            name="isChecked"
+            type="Boolean" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                app:album="@{viewData.uri}"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <FrameLayout
+                android:layout_gravity="bottom"
+                android:background="@drawable/shape_album_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="12sp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginStart="12dp"
+                    android:textColor="@color/font_white"
+                    android:text="@{viewData.album.key}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </FrameLayout>
+            <FrameLayout
+                android:visibility="@{isChecked?View.VISIBLE:View.GONE}"
+                android:id="@+id/checked"
+                android:background="@drawable/shape_album_checked"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

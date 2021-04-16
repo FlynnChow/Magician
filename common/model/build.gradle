@@ -1,0 +1,10 @@
+apply plugin: 'com.android.library'
+
+apply from: rootProject.file('base.gradle')
+
+
+dependencies {
+    implementation project(":base")
+    api(depend.room)
+    api(depend.room_ktx)
+}

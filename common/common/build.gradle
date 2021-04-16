@@ -5,9 +5,11 @@ apply from: rootProject.file('base.gradle')
 
 dependencies {
     api project(":base")
+    api project(":common:model")
     api project(":common:component")
     api project(":common:database")
     api project(":common:gl_shader")
     api project(":common:net")
     api project(":common:video_codec")
+    api project(":common:ml_kit")
 }

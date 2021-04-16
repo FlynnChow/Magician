@@ -1,10 +1,10 @@
 package com.flynnchow.zero.common.helper
 
 import android.app.Activity
-import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
+import com.flynnchow.zero.base.helper.LogDebug
 import java.lang.ref.WeakReference
 
 class ActivityHelper(
@@ -32,7 +32,7 @@ class ActivityHelper(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun destroy() {
-        logDebug("des")
+        LogDebug("des")
         activityTask.remove(activityRef)
     }
 }

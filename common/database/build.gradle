@@ -5,6 +5,7 @@ apply from: rootProject.file('base.gradle')
 
 dependencies {
     implementation project(":base")
+    implementation project(":common:model")
     api(depend.room)
     api(depend.room_ktx)
 }

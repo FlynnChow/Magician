@@ -7,12 +7,12 @@ import androidx.lifecycle.ViewModel
 import com.flynnchow.zero.common.proxy_api.CoroutineProxy
 import com.flynnchow.zero.common.proxy_impl.CoroutineProxyImpl
 
-class BaseViewModel : ViewModel(), CoroutineProxy by CoroutineProxyImpl() {
+abstract class BaseViewModel : ViewModel(), CoroutineProxy by CoroutineProxyImpl() {
 
-    protected val _toast = MutableLiveData<String>()
+    private val _toast = MutableLiveData<String>()
     val toast: LiveData<String> = _toast //显示toast
 
-    protected val _finish = MutableLiveData<Boolean>()
+    private val _finish = MutableLiveData<Boolean>()
     val finish: LiveData<Boolean> = _finish //activity.finish()
 
     private val _backPress = MutableLiveData<Boolean>()
@@ -22,5 +22,13 @@ class BaseViewModel : ViewModel(), CoroutineProxy by CoroutineProxyImpl() {
     override fun onCleared() {
         super.onCleared()
         clearCoroutine()
+    }
+
+    fun showToast(toast:String){
+        _toast.value = toast
+    }
+
+    fun finish(){
+        _finish.value = true
     }
 }

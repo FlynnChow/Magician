@@ -14,6 +14,10 @@ dependencies {
     api(depend.lifecycle_server)
     api(depend.datastore)
     api(depend.eventbus)
+    api(depend.gson)
+    api(depend.work)
+    api(depend.share_anim)
+    api(depend.image_viewer)
 
     testImplementation(testDepend.junit)
 

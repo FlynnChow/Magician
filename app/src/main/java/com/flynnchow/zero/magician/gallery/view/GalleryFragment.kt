@@ -1,60 +1,78 @@
 package com.flynnchow.zero.magician.gallery.view
 
-import android.Manifest
-import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.flynnchow.zero.base.helper.LogDebug
 import com.flynnchow.zero.common.fragment.BindingFragment
-import com.flynnchow.zero.common.helper.logDebug
 import com.flynnchow.zero.magician.R
+import com.flynnchow.zero.magician.base.helper.TitleFontHelper
+import com.flynnchow.zero.magician.base.provider.MediaProvider
+import com.flynnchow.zero.magician.base.work.ImageAsyncWorker
 import com.flynnchow.zero.magician.databinding.FragmentGalleryBinding
+import com.flynnchow.zero.magician.gallery.GalleryType
+import com.flynnchow.zero.magician.gallery.adapter.GalleryMainAdapter
+import com.flynnchow.zero.magician.gallery.viewmodel.GalleryViewModel
+import com.google.android.material.transition.platform.Hold
+import com.google.android.material.transition.platform.MaterialContainerTransform
+import com.google.android.material.transition.platform.MaterialFadeThrough
 
-class GalleryFragment:BindingFragment<FragmentGalleryBinding>(R.layout.fragment_gallery) {
+
+class GalleryFragment : BindingFragment<FragmentGalleryBinding>(R.layout.fragment_gallery) {
+    private val galleryViewModel by lazy {
+        getViewModel(GalleryViewModel::class.java)
+    }
+    private val adapter by lazy {
+        GalleryMainAdapter(GalleryType.DEFAULT)
+    }
+
     override fun onInitView() {
+        mBinding.galleyRecyclerView.adapter = adapter
+        mBinding.galleyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        mBinding.gallerySort.setOnClickListener {
+            when (adapter.type) {
+                GalleryType.DAY_ONE -> {
+                    mBinding.gallerySort.setImageResource(R.drawable.layout_3)
+                    adapter.type = GalleryType.DAY_THREE
+                }
+                GalleryType.DAY_THREE -> {
+                    mBinding.gallerySort.setImageResource(R.drawable.layout_1)
+                    adapter.type = GalleryType.MONTH_FIVE
+                }
+                GalleryType.MONTH_FIVE -> {
+                    mBinding.gallerySort.setImageResource(R.drawable.layout_2)
+                    adapter.type = GalleryType.DAY_ONE
+                }
+            }
+            adapter.notifyItemRangeChanged(0, adapter.itemCount)
+        }
+        TitleFontHelper.updateTitleFont(mBinding.title)
+    }
 
+    override fun onInitObserver() {
+        super.onInitObserver()
+        MediaProvider.instance.galleryData.observe(this, {
+            galleryViewModel.initGallery(it)
+        })
+        galleryViewModel.data.observe(this, {
+            adapter.setData(it)
+        })
+        MediaProvider.instance.galleryUpdate.observe(this, {
+            adapter.updateData(it, mBinding.galleyRecyclerView)
+        })
+        (mBinding.galleyRecyclerView.itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
     }
 
     override fun onInitData(isFirst: Boolean, savedInstanceState: Bundle?) {
-        mBinding.per.setOnClickListener {
-            requestPermissions(arrayOf(
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ))
-        }
-        mBinding.get.setOnClickListener {
-            Intent.ACTION_MEDIA_SCANNER_SCAN_FILE
-            Thread{
-                val imageUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-                val imageStr = arrayOf(
-                    MediaStore.Images.Media._ID,
-                    MediaStore.Images.Media.SIZE,
-                    MediaStore.Images.Media.DISPLAY_NAME,
-                    MediaStore.Images.Media.DATA,
-                    MediaStore.Images.Media.DATE_ADDED,
-                    MediaStore.Images.Media.DATE_MODIFIED,
-                    MediaStore.Images.Media.WIDTH,
-                    MediaStore.Images.Media.HEIGHT,
-                    MediaStore.Images.Media.MIME_TYPE,
-                )
-                val cursor = requireActivity().contentResolver.query(
-                    imageUri,
-                    null,null,null,null
-                )
-                logDebug("开始  ${cursor?.count}")
-                cursor?.run {
-                    while (moveToNext()){
-                        val id = cursor.getString(cursor.getColumnIndex(imageStr[0]))
-                        val size = cursor.getInt(cursor.getColumnIndex(imageStr[1]))
-                        val name = cursor.getString(cursor.getColumnIndex(imageStr[2]))
-                        val data = cursor.getString(cursor.getColumnIndex(imageStr[3]))
-                        val addDate = cursor.getString(cursor.getColumnIndex(imageStr[4]))
-                        val modifiedDate = cursor.getString(cursor.getColumnIndex(imageStr[5]))
-                        val width = cursor.getString(cursor.getColumnIndex(imageStr[6]))
-                        val height = cursor.getString(cursor.getColumnIndex(imageStr[7]))
-                        val type1 = cursor.getString(cursor.getColumnIndex(imageStr[8]))
-                        logDebug("${id}  ${size}  ${name}  ${data} ${addDate} ${modifiedDate} ${width} ${height} ${type1}")
-                    }
-                }
-            }.start()
-        }
+
+    }
+
+    override fun onCreateBefore() {
+        super.onCreateBefore()
+        sharedElementEnterTransition = MaterialContainerTransform()
+        exitTransition = Hold()
+        exitTransition = MaterialFadeThrough()
+        enterTransition = MaterialFadeThrough()
     }
 }

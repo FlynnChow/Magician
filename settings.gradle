@@ -1,3 +1,6 @@
+include ':common:ml_kit'
+include ':common:model'
+include ':model'
 include ':app'
 include ':base'
 include ':common:net'

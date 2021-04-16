@@ -1,0 +1,5 @@
+<resources>
+    <string name="dialog_talker_delete">删除</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_confirm">确定</string>
+</resources>

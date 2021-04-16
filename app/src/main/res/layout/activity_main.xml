@@ -1,71 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="pageAdapter"
             type="com.flynnchow.zero.magician.main.MainPageAdapter" />
     </data>
+
     <FrameLayout
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-       <FrameLayout
-           android:id="@+id/mainContainer"
-           android:layout_marginBottom="@dimen/bottom_bar_height"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"/>
-        <LinearLayout
-            android:layout_gravity="bottom"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/mainContainer"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/bottom_bar_height">
-            <FrameLayout
-                android:onClick="@{pageAdapter::switchPage}"
-                android:id="@+id/main_gallery"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_gravity="center"
-                    android:text="@string/home_tab_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </FrameLayout>
-            <FrameLayout
-                android:onClick="@{pageAdapter::switchPage}"
-                android:id="@+id/main_photo_album"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_gravity="center"
-                    android:text="@string/home_tab_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </FrameLayout>
-            <FrameLayout
-                android:onClick="@{pageAdapter::switchPage}"
-                android:id="@+id/main_store"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_gravity="center"
-                    android:text="@string/home_tab_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </FrameLayout>
-            <FrameLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_gravity="center"
-                    android:text="@string/home_tab_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </FrameLayout>
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/bottom_bar_height" />
+
+        <include
+            android:id="@+id/mainNav"
+            layout="@layout/view_main_nav"
+            app:pageAdapter="@{pageAdapter}" />
     </FrameLayout>
 </layout>

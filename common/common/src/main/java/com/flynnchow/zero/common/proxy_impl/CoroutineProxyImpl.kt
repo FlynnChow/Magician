@@ -9,15 +9,17 @@ import java.lang.Exception
 import kotlin.coroutines.CoroutineContext
 
 class CoroutineProxyImpl : CoroutineProxy, LifecycleObserver {
-    private val _error:MutableLiveData<Throwable> = MutableLiveData()
+    private val _error: MutableLiveData<Throwable> = MutableLiveData()
     private val coroutineScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+
+    override fun startLaunch(block: suspend () -> Unit) = startLaunch(block, null, null)
 
     override fun startLaunch(
         block: suspend () -> Unit,
         error: ((e: Throwable) -> Unit)?,
         finally: (() -> Unit)?
     ): Job {
-        return startLaunch(Dispatchers.Main,block,error,finally)
+        return startLaunch(Dispatchers.Main, block, error, finally)
     }
 
     override fun startLaunch(
@@ -29,13 +31,13 @@ class CoroutineProxyImpl : CoroutineProxy, LifecycleObserver {
         return coroutineScope.launch {
             try {
                 block.invoke()
-            }catch (e:Exception){
-                if(error != null){
+            } catch (e: Exception) {
+                if (error != null) {
                     error.invoke(e)
-                }else{
+                } else {
                     _error.value = e
                 }
-            }finally {
+            } finally {
                 finally?.invoke()
             }
         }

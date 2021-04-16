@@ -49,7 +49,7 @@ abstract class BaseFragment(@LayoutRes private val resId: Int?) : Fragment(),
     }
 
     @CallSuper
-    protected fun onCreateBefore() {
+    protected open fun onCreateBefore() {
 
     }
 
@@ -65,7 +65,7 @@ abstract class BaseFragment(@LayoutRes private val resId: Int?) : Fragment(),
     protected abstract fun onInitData(isFirst:Boolean,savedInstanceState: Bundle?)
 
     @CallSuper
-    protected fun onInitObserver() {
+    protected open fun onInitObserver() {
         observerError().observe(this, Observer {
             toast(it.message)
         })

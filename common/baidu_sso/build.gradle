@@ -1,0 +1,12 @@
+apply plugin: 'com.android.library'
+
+apply from: rootProject.file('base.gradle')
+apply plugin: 'kotlin-android'
+
+
+dependencies {
+    api project(":base")
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+}

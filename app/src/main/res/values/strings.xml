@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Magician</string>
+    <string name="app_detail">智能音乐相册</string>
     <string name="home_tab_1">照片</string>
     <string name="home_tab_2">分类</string>
     <string name="home_tab_3">故事</string>
@@ -9,4 +10,18 @@
     <string name="home_tab_name_2">智能分类</string>
     <string name="home_tab_name_3">故事</string>
     <string name="home_tab_name_4">设置</string>
+
+    <string-array name="video_speed">
+        <item>0.25X</item>
+        <item>0.5X</item>
+        <item>1.0X</item>
+        <item>2.0X</item>
+        <item>4.0X</item>
+    </string-array>
+    <string name="test">
+        首节伊始，奥科罗进攻端十分活跃，两度空切篮下上篮得手，维金斯不甘示弱，里突外投连拿5分还以颜色。此后塞克斯顿接管了骑士进攻，他面对任何人防守都可以无差别单打，一己之力单节轰下14分。库里则在外线失准，频频远投打铁，只能依靠冲击篮下艰难取分。首节结束时，骑士暂时领先勇士3分。
+进入次节，勇士二阵容发挥出色，普尔接连命中两记三分带队反超比分，维金斯十分积极，多次在中距离出手命中，达米安-李也频频杀入内线取分。骑士方面加兰挺身而出，三分中投连连命中率队追分，但库里回到场上后三度冲击篮下得手稳住局面。半场战罢，勇士以63-52领先骑士。
+异边再战，塞克斯顿里突外投连拿5分吹响了反击号角，格林和维金斯则连中三分及时止血。此后普林斯开始爆发，三分、上篮、中投样样精通，一度帮助球队把分差缩小到只差4分。关键时刻库里终于找到远投手感，三分线外连中两球。三节比赛结束，勇士仍然领先骑士10分。
+进入末节争夺，安德森突然爆发，完成一记暴扣之后又接连命中两记三分，塞克斯顿眼看分差被拉开果断加强了个人进攻，连投带罚拿下9分留住希望。此后库里回到场上开始收比赛，他联手维金斯飙中四记三分重新拉开分差。此后骑士眼看翻盘无望就此鸣金收兵，勇士轻松收下一场胜利。
+    </string>
 </resources>

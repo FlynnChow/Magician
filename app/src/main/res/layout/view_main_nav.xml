@@ -54,13 +54,20 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2">
-            <ImageView
-                android:layout_marginTop="4dp"
-                android:padding="2dp"
-                android:layout_gravity="center"
-                android:src="@drawable/more_config"
-                android:layout_width="24dp"
-                android:layout_height="24dp"/>
+            <FrameLayout
+                android:id="@+id/main_config"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_gravity="center"
+                    android:src="@drawable/more_config"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"/>
+            </FrameLayout>
         </FrameLayout>
     </LinearLayout>
 </layout>

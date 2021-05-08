@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.MemoryCategory
+import com.flynnchow.zero.base.helper.LogDebug
 import com.flynnchow.zero.common.helper.ImageHelper
 import com.flynnchow.zero.component.multi_recyclerview.SimpleHolder
 import com.flynnchow.zero.component.view.dp
@@ -28,24 +29,49 @@ class GalleryImageHolder(mBinding: ViewDataBinding) :
                 val metrics = mBinding.image.context.resources.displayMetrics
                 val width = metrics.widthPixels - widthPadding
                 val layoutParams = mBinding.image.layoutParams
-                layoutParams.height = width * data.height / data.width
+                val resWidth: Int
+                val resHeight: Int
+                if (data.getDegree() == 90 || data.getDegree() == 270) {
+                    resWidth = data.height
+                    resHeight = data.width
+                } else {
+                    resWidth = data.width
+                    resHeight = data.height
+                }
+                if (data.width > 0) {
+                    layoutParams.height = width * resHeight / resWidth
+                } else {
+                    layoutParams.height = 200.dp
+                }
                 layoutParams.width = width
                 mBinding.image.layoutParams = layoutParams
                 mBinding.viewData = viewData
                 mBinding.root.setOnClickListener {
-                    ImageHelper.viewImage(mBinding.image, MediaProvider.instance.getGalleryList().toTypedArray(),findIndex(data.id))
+                    ImageHelper.viewImage(
+                        mBinding.image,
+                        MediaProvider.instance.getGalleryList().toTypedArray(),
+                        findIndex(data.id)
+                    )
                 }
             }
             is ItemImageMediumBinding -> {
                 mBinding.viewData = viewData
                 mBinding.root.setOnClickListener {
-                    ImageHelper.viewImage(mBinding.image, MediaProvider.instance.getGalleryList().toTypedArray(),findIndex(data.id))
+                    ImageHelper.viewImage(
+                        mBinding.image,
+                        MediaProvider.instance.getGalleryList().toTypedArray(),
+                        findIndex(data.id)
+                    )
                 }
             }
             is ItemImageMiniBinding -> {
                 mBinding.viewData = viewData
                 mBinding.root.setOnClickListener {
-                    ImageHelper.viewImage(mBinding.image, MediaProvider.instance.getGalleryList().toTypedArray(),findIndex(data.id))
+                    ImageHelper.viewImage(
+                        mBinding.image,
+                        MediaProvider.instance.getGalleryList().toTypedArray(),
+                        findIndex(data.id)
+                    )
                 }
             }
         }

@@ -14,6 +14,8 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/common/baidu_oauth_sdk" />
+            <option value="$PROJECT_DIR$/common/baidu_sso" />
             <option value="$PROJECT_DIR$/common/common" />
             <option value="$PROJECT_DIR$/common/component" />
             <option value="$PROJECT_DIR$/common/database" />

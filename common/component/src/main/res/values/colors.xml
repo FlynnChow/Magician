@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="transparent">#00000000</color>
     <color name="purple_200">#B39DDB</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="store_background">#EEEEEE</color>
+    <color name="video_background">#0F0F1E</color>
+    <color name="creator_bottom_background">#1E1E28</color>
+    <color name="creator_line_background">#646464</color>
+    <color name="effects_bg">#8080D8FF</color>
 
     <color name="font_black">#FF000000</color>
     <color name="font_black_1">#FF333333</color>
@@ -22,9 +28,19 @@
     <color name="black_2">#FF777777</color>
     <color name="black_3">#FF999999</color>
 
+    <color name="audio_gray_background">#F0F0F0</color>
+
     <color name="red_200">#FF5252</color>
     <color name="red_400">#FF1744</color>
 
+    <color name="line_color">#DCDCDC</color>
+
     <color name="image_place_holder">#E1E1E1</color>
     <color name="dialog_line">#B7B7B7</color>
+
+    <color name="switch_thumb">#536DFE</color>
+    <color name="switch_checked">#8C9EFF</color>
+    <color name="switch_unchecked">#DCDCDC</color>
+
+    <color name="drawer_item">#EBEBEB</color>
 </resources>

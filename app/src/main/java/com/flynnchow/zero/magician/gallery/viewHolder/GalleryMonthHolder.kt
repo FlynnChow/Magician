@@ -16,9 +16,13 @@ class GalleryMonthHolder(mBinding: ItemTitleScrollBinding) :
     fun bindData(data: GalleryMonthData, type: Int) {
         mBinding.dateHint = data.getMonthHint()
         mBinding.showTitle = type == GalleryType.MONTH_FIVE
-        mBinding.listView.layoutManager = layoutManager
-        mBinding.listView.adapter = adapter
         (mBinding.listView.itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
-        adapter.onBind(type,data.data)
+        if (mBinding.listView.layoutManager != layoutManager) {
+            mBinding.listView.layoutManager = layoutManager
+        }
+        if (mBinding.listView.adapter == null) {
+            mBinding.listView.adapter = adapter
+        }
+        adapter.onBind(type, data.data)
     }
 }

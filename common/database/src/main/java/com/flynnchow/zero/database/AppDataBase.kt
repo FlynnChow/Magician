@@ -3,12 +3,13 @@ package com.flynnchow.zero.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.flynnchow.zero.database.dao.*
-import com.flynnchow.zero.model.AppConfig
-import com.flynnchow.zero.model.MLPhotoAlbum
-import com.flynnchow.zero.model.MediaModel
+import com.flynnchow.zero.model.*
 
-@Database(entities = [MediaModel::class,MLPhotoAlbum::class,AppConfig::class], version = 1)
-abstract class AppDataBase: RoomDatabase()  {
+@Database(
+    entities = [MediaModel::class, MLPhotoAlbum::class, AppConfig::class, StoreModel::class, StoreVideo::class],
+    version = 1
+)
+abstract class AppDataBase : RoomDatabase() {
     abstract fun getMediaDao(): MediaDao
 
     abstract fun getMlAlbumDao(): MLAlbumDao

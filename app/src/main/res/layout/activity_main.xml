@@ -3,27 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="pageAdapter"
             type="com.flynnchow.zero.magician.main.MainPageAdapter" />
     </data>
 
-    <FrameLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
+        android:layout_height="match_parent">
         <FrameLayout
-            android:id="@+id/mainContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/bottom_bar_height" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <include
-            android:id="@+id/mainNav"
-            layout="@layout/view_main_nav"
-            app:pageAdapter="@{pageAdapter}" />
-    </FrameLayout>
+            <FrameLayout
+                android:id="@+id/mainContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/bottom_bar_height" />
+
+            <include
+                android:id="@+id/mainNav"
+                layout="@layout/view_main_nav"
+                app:pageAdapter="@{pageAdapter}" />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/drawContainer"
+            android:clickable="true"
+            android:background="@color/white"
+            android:layout_marginEnd="40dp"
+            android:layout_gravity="start"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

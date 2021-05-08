@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".player.PlayerActivity">
+        <io.microshow.rxffmpeg.player.RxFFmpegPlayerView
+            android:id="@+id/player"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageView
+            app:tint="@color/white"
+            android:fitsSystemWindows="true"
+            android:id="@+id/back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/ripple_oval"
+            android:clickable="true"
+            android:padding="4dp"
+            android:src="@drawable/back"/>
+    </FrameLayout>
+</layout>

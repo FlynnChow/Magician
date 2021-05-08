@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.flynnchow.zero.base.helper.LogDebug
 import com.flynnchow.zero.magician.R
 import com.flynnchow.zero.magician.gallery.GalleryType
 import com.flynnchow.zero.magician.gallery.viewHolder.GalleryImageHolder
@@ -58,7 +59,10 @@ class GalleryImageAdapter(private var _type:Int):RecyclerView.Adapter<GalleryIma
     }
 
     fun onBind(type:Int, data:List<MediaModel>){
-        _type = type
         _data = data as ArrayList<MediaModel>
+        if (type != _type){
+            _type = type
+            notifyItemRangeChanged(0,itemCount)
+        }
     }
 }

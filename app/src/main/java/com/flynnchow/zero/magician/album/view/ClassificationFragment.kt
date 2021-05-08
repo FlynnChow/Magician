@@ -1,17 +1,16 @@
 package com.flynnchow.zero.magician.album.view
 
 import android.os.Bundle
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
-import com.flynnchow.zero.common.fragment.BindingFragment
+import com.flynnchow.zero.common.fragment.MagicianFragment
 import com.flynnchow.zero.magician.R
 import com.flynnchow.zero.magician.album.adapter.ClassificationAdapter
 import com.flynnchow.zero.magician.base.provider.MediaProvider
 import com.flynnchow.zero.magician.databinding.FragmentClassificationBinding
+import com.google.android.material.transition.platform.MaterialSharedAxis
 
 class ClassificationFragment :
-    BindingFragment<FragmentClassificationBinding>(R.layout.fragment_classification) {
+    MagicianFragment<FragmentClassificationBinding>(R.layout.fragment_classification) {
     companion object {
         fun createClassificationFragment(target: String,count:Int = 3): ClassificationFragment {
             val data = Bundle().apply {
@@ -52,5 +51,11 @@ class ClassificationFragment :
                 adapter?.updateData(it)
             }
         })
+    }
+
+    override fun onCreateBefore() {
+        super.onCreateBefore()
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, /* forward= */ true)
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, /* forward= */ false)
     }
 }

@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/store_add"
+        android:title="添加照片" />
+    <item android:id="@+id/store_change"
+        android:title="更换封面" />
+    <item android:id="@+id/store_rename"
+        android:title="重命名" />
+    <item android:id="@+id/store_edit"
+        android:title="编辑" />
+    <item android:id="@+id/store_delete"
+        android:title="删除" />
+</menu>

@@ -16,17 +16,21 @@ class CoroutineProxyImpl : CoroutineProxy, LifecycleObserver {
 
     override fun startLaunch(
         block: suspend () -> Unit,
-        error: ((e: Throwable) -> Unit)?,
-        finally: (() -> Unit)?
+        error: (suspend(e: Throwable) -> Unit)?,
+        finally: (suspend() -> Unit)?
     ): Job {
         return startLaunch(Dispatchers.Main, block, error, finally)
     }
 
+    override fun startLaunch(dispatcher: CoroutineDispatcher, block: suspend () -> Unit): Job {
+        return startLaunch(dispatcher, block, null, null)
+    }
+
     override fun startLaunch(
-        dispatcher: MainCoroutineDispatcher,
+        dispatcher: CoroutineDispatcher,
         block: suspend () -> Unit,
-        error: ((e: Throwable) -> Unit)?,
-        finally: (() -> Unit)?
+        error: (suspend(e: Throwable) -> Unit)?,
+        finally: (suspend() -> Unit)?
     ): Job {
         return coroutineScope.launch {
             try {

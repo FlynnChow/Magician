@@ -18,8 +18,8 @@ class AlbumTitleTouchHelper(private val adapter: AlbumTitleAdapter) : ItemTouchH
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-        val fromPosition = viewHolder.adapterPosition //得到拖动ViewHolder的position
-        val toPosition = target.adapterPosition //得到目标ViewHolder的position
+        val fromPosition = viewHolder.bindingAdapterPosition //得到拖动ViewHolder的position
+        val toPosition = target.bindingAdapterPosition //得到目标ViewHolder的position
         if (fromPosition < toPosition) {
             when(adapter.checkPosition){
                 toPosition -> adapter.checkPosition = fromPosition

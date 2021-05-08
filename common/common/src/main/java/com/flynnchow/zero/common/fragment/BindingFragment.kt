@@ -10,7 +10,7 @@ abstract class BindingFragment<DataBinding : ViewDataBinding>(@LayoutRes private
     BaseFragment(resId) {
     protected lateinit var mBinding: DataBinding
 
-    final override fun createView(resId: Int, container: ViewGroup?): View {
+    override fun createView(resId: Int, container: ViewGroup?): View {
         mBinding = DataBindingUtil.inflate(layoutInflater, resId, container, false)
         mBinding.lifecycleOwner = this
         return mBinding.root

@@ -2,8 +2,12 @@ package com.flynnchow.zero.common.activity
 
 import android.Manifest
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.flynnchow.zero.baidu_sso.BaiduSsoActivity
 import com.flynnchow.zero.base.helper.LogDebug
 import com.flynnchow.zero.common.proxy_api.CoroutineProxy
 import com.flynnchow.zero.common.helper.ActivityHelper
@@ -35,13 +40,19 @@ abstract class BaseActivity(@LayoutRes private val resId: Int?) : AppCompatActiv
 
     private lateinit var activityProxy: ActivityHelper
 
+    protected lateinit var activityLaunch: ActivityResultLauncher<Intent>
+
     private var permissionCallback:((result:Boolean,permissions:List<String>)->Unit)? = null
 
     final override fun onCreate(savedInstanceState: Bundle?) {
         activityProxy = ActivityHelper(this, lifecycle)
         onCreateBefore()
         super.onCreate(savedInstanceState)
-        resId?.run { createView(this) }
+        resId?.run { setRootView(this) }
+        activityLaunch =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                onActivityForResult(it)
+            }
         onRootViewCreated()
         onInitView()
         onInitData(savedInstanceState)
@@ -53,7 +64,7 @@ abstract class BaseActivity(@LayoutRes private val resId: Int?) : AppCompatActiv
         YcShareElement.enableContentTransition(application)
     }
 
-    protected open fun createView(@LayoutRes resId: Int) {
+    protected open fun setRootView(@LayoutRes resId: Int) {
         setContentView(resId)
     }
 
@@ -155,6 +166,10 @@ abstract class BaseActivity(@LayoutRes private val resId: Int?) : AppCompatActiv
             }
             permissionCallback?.invoke(result,permissionsResult)
         }
+    }
+
+    protected open fun onActivityForResult(result: ActivityResult) {
+
     }
 
     @CallSuper

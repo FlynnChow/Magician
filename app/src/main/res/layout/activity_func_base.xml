@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.flynnchow.zero.magician.func.viewmodel.FuncViewModel" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".func.base.FuncBaseActivity">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <ImageView
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/back"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/back"
+                android:clickable="true"
+                android:background="@drawable/ripple_oval"
+                android:padding="4dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+            <TextView
+                app:layout_constraintBottom_toTopOf="@id/tip"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/back"
+                android:layout_marginStart="12dp"
+                android:textSize="18sp"
+                android:textColor="@color/font_black_1"
+                android:id="@+id/name"
+                android:text="@{viewModel.title}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                app:layout_constraintStart_toEndOf="@id/back"
+                android:textColor="@color/font_black_2"
+                android:textSize="12sp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="0dp"
+                android:text="@{viewModel.hint}"
+                android:id="@+id/tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+</layout>

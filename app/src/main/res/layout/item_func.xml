@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="name"
+            type="String" />
+        <variable
+            name="drawable"
+            type="android.graphics.drawable.Drawable" />
+        <variable
+            name="activity"
+            type="com.flynnchow.zero.magician.main.MainActivity" />
+    </data>
+
+    <FrameLayout
+        android:onClick="@{()->activity.onClickFunc(name)}"
+        android:clickable="true"
+        android:background="@drawable/ripple_func_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@{drawable}"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+            <TextView
+                android:textSize="13sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black_1"
+                android:text="@{name}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </FrameLayout>
+</layout>

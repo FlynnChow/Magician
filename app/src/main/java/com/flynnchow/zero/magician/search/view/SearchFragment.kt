@@ -3,7 +3,7 @@ package com.flynnchow.zero.magician.search.view
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
-import com.flynnchow.zero.common.fragment.BindingFragment
+import com.flynnchow.zero.common.fragment.MagicianFragment
 import com.flynnchow.zero.magician.R
 import com.flynnchow.zero.magician.base.provider.MediaProvider
 import com.flynnchow.zero.magician.databinding.FragmentSearchBinding
@@ -13,7 +13,7 @@ import com.flynnchow.zero.ml_kit.MLKitHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class SearchFragment:BindingFragment<FragmentSearchBinding>(R.layout.fragment_search) {
+class SearchFragment:MagicianFragment<FragmentSearchBinding>(R.layout.fragment_search) {
     private val viewModel by lazy {
         getViewModel(requireActivity(),SearchViewModel::class.java)
     }

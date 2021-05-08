@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.work.*
 import com.flynnchow.zero.base.BaseApplication
-import com.flynnchow.zero.base.helper.LogDebug
-import com.flynnchow.zero.common.util.StringUtils
+import com.flynnchow.zero.base.util.StringUtils
 import com.flynnchow.zero.database.RoomManager
 import com.flynnchow.zero.magician.base.provider.MediaProvider
 import com.flynnchow.zero.ml_kit.MLKitManager
@@ -13,7 +12,6 @@ import com.flynnchow.zero.model.MediaModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class ImageAsyncWorker {
@@ -41,8 +39,6 @@ class ImageAsyncWorker {
         val instance: ImageAsyncWorker by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
             ImageAsyncWorker()
         }
-        const val IMAGE_ASYNC_WORK_TAG = "ImageAsyncProvider"
-        const val WORK_NAME = "ImageAsync"
     }
 
     private var runing = false
@@ -64,11 +60,11 @@ class ImageAsyncWorker {
             mlManager.doAsync(data) {
                 it?.apply {
                     updateResult(this, progress)
-                    if (runing) {
-                        runing = false
-                    }
                 }
             }
+        }
+        if (runing) {
+            runing = false
         }
     }
 
@@ -82,18 +78,5 @@ class ImageAsyncWorker {
                 MediaProvider.instance.updateMediaData(MediaProvider.MediaType.IMAGE, data)
             }
         }
-    }
-
-    @Deprecated("")
-    private fun doLaunchImageAsync2() {
-        val constraints: Constraints = Constraints.Builder().build()
-        val mlRequest = OneTimeWorkRequest.Builder(MLSaveResultWorker::class.java)
-            .setConstraints(constraints)
-            .addTag(IMAGE_ASYNC_WORK_TAG)
-            .build()
-        WorkManager.getInstance(BaseApplication.instance).enqueueUniqueWork(
-            WORK_NAME,
-            ExistingWorkPolicy.REPLACE, mlRequest
-        )
     }
 }

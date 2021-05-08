@@ -6,17 +6,16 @@ import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.flynnchow.zero.common.activity.BindingActivity
+import com.flynnchow.zero.common.activity.MagicianActivity
 import com.flynnchow.zero.component.view.ViewUtils
 import com.flynnchow.zero.magician.R
-import com.flynnchow.zero.magician.album.view.ClassificationFragment
 import com.flynnchow.zero.magician.databinding.ActivitySearchBinding
 import com.flynnchow.zero.magician.search.viewmodel.SearchViewModel
 import com.hw.ycshareelement.YcShareElement
 import com.hw.ycshareelement.transition.IShareElements
 import com.hw.ycshareelement.transition.ShareElementInfo
 
-class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_search) {
+class SearchActivity : MagicianActivity<ActivitySearchBinding>(R.layout.activity_search) {
     private val searchViewModel by lazy { getViewModel(SearchViewModel::class.java) }
     private val fragment = SearchFragment()
     private var lastFragment:Fragment? = null

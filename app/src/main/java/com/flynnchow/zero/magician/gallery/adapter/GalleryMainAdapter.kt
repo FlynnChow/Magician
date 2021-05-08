@@ -44,7 +44,7 @@ class GalleryMainAdapter(var type: Int) : RecyclerView.Adapter<GalleryMonthHolde
         notifyDataSetChanged()
     }
 
-    fun updateData(data: MediaModel,recyclerView: RecyclerView) {
+    fun updateData(data: MediaModel, recyclerView: RecyclerView) {
         val dayHint = GalleryDayData.getDayHint(data)
         val monthHint = GalleryDayData.getMonthHint(data)
         for (index in 0 until itemCount) {
@@ -57,7 +57,7 @@ class GalleryMainAdapter(var type: Int) : RecyclerView.Adapter<GalleryMonthHolde
                             if (data.id == image.id) {
                                 (dayData.images as? ArrayList)?.apply {
                                     this[imageIndex] = data
-                                    notifyItemChanged(index)
+                                    notifyItemChanged(imageIndex)
                                 }
                                 return
                             }

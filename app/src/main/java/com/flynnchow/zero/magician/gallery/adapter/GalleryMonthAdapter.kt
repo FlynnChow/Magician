@@ -23,7 +23,7 @@ class GalleryMonthAdapter(private var _type:Int): RecyclerView.Adapter<GalleryDa
             parent,
             false
         )
-        val layoutManager:RecyclerView.LayoutManager = when(_type){
+        val layoutManager:RecyclerView.LayoutManager = when(viewType){
             GalleryType.DAY_ONE->{
                 LinearLayoutManager(parent.context)
             }
@@ -46,8 +46,15 @@ class GalleryMonthAdapter(private var _type:Int): RecyclerView.Adapter<GalleryDa
         return _data.size
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return _type
+    }
+
     fun onBind(type:Int,data:List<GalleryDayData>){
-        _type = type
+        if (type != _type){
+            _type = type
+            notifyItemRangeChanged(0,itemCount)
+        }
         _data = data as ArrayList<GalleryDayData>
     }
 }

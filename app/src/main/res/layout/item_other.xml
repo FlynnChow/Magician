@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="name"
+            type="String" />
+        <variable
+            name="drawable"
+            type="android.graphics.drawable.Drawable" />
+        <variable
+            name="activity"
+            type="com.flynnchow.zero.magician.main.MainActivity" />
+    </data>
+
+    <FrameLayout
+        android:onClick="@{()->activity.onClickOther(name)}"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/ripple_other_item"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <ImageView
+            app:tint="@color/black"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center_vertical"
+            android:src="@{drawable}"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+        <TextView
+            android:text="@{name}"
+            android:textStyle="bold"
+            android:layout_marginStart="52dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            app:tint="@color/black_3"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/right_arrow"
+            android:layout_gravity="center_vertical|end"
+            android:layout_width="12dp"
+            android:layout_height="12dp"/>
+    </FrameLayout>
+</layout>

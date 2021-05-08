@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.flynnchow.zero.magician.main.MainActivity" />
+    </data>
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            app:activity="@{activity}"
+            app:drawable="@{@drawable/config}"
+            app:name="@{`应用设置`}"
+            layout="@layout/item_other"/>
+        <include
+            app:activity="@{activity}"
+            app:drawable="@{@drawable/debug}"
+            app:name="@{`工程模式`}"
+            layout="@layout/item_other"/>
+    </LinearLayout>
+</layout>

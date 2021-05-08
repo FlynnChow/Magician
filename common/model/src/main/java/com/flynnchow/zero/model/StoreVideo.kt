@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "store_video")
 data class StoreVideo(
-    @PrimaryKey val id:String,
     val path:String,
-    val duration:Long,
-    val createDate:String,
+    val duration:Int,
+    @PrimaryKey val id:Int? = null,
+    val createDate:Long = System.currentTimeMillis(),
 )

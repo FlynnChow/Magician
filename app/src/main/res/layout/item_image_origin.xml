@@ -3,25 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewData"
             type="com.flynnchow.zero.magician.gallery.viewdata.GalleryImageData" />
+
+        <import type="com.flynnchow.zero.base.util.StringUtils" />
+
+        <import type="android.view.View" />
     </data>
 
     <FrameLayout
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="center_horizontal">
+
         <ImageView
-            android:src="@color/image_place_holder"
-            app:img_high="@{viewData.image.uri}"
-            android:scaleType="fitStart"
             android:id="@+id/image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:scaleType="fitStart"
+            android:src="@color/image_place_holder"
+            app:img_high="@{viewData.image.uri}" />
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/yun_sync"
+            android:visibility="@{StringUtils.INSTANCE.isEmpty(viewData.image.baiduMd5)?View.GONE:View.VISIBLE}" />
     </FrameLayout>
 </layout>

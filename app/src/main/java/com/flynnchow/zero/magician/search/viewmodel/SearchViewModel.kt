@@ -48,6 +48,8 @@ class SearchViewModel : BaseViewModel() {
                     monthList.add(monthBean)
                 }
                 _data.value = monthList
+            }else{
+                _data.value = ArrayList()
             }
         }
     }

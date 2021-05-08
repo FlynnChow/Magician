@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="hint"
+            type="String" />
+        <variable
+            name="uri"
+            type="Object" />
+    </data>
+
+    <FrameLayout
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            app:img="@{uri}"
+            android:transitionName="storeImage"
+            android:id="@+id/image"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+        <LinearLayout
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="bottom"
+            android:gravity="center_vertical"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:background="@drawable/shape_video_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                app:tint="@color/white"
+                android:src="@drawable/player"
+                android:layout_width="12dp"
+                android:layout_height="12dp"/>
+            <TextView
+                android:layout_marginStart="4dp"
+                android:textSize="10sp"
+                android:textColor="@color/white"
+                tools:text="0:24"
+                android:text="@{hint}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </FrameLayout>
+</layout>

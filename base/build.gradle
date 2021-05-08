@@ -4,6 +4,8 @@ apply from: rootProject.file('base.gradle')
 
 
 dependencies {
+    api(depend.activity)
+    api(depend.fragment)
     api(depend.appcompat)
     api(depend.kotlin_stdlib)
     api(depend.core_ktx)
@@ -18,6 +20,8 @@ dependencies {
     api(depend.work)
     api(depend.share_anim)
     api(depend.image_viewer)
+    api(depend.image_checker)
+    api(depend.web_view)
 
     testImplementation(testDepend.junit)
 

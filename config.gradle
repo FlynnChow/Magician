@@ -18,6 +18,8 @@ ext {
     depend = [
             constraint_layout  : "androidx.constraintlayout:constraintlayout:2.0.4",
             core_ktx           : "androidx.core:core-ktx:1.3.2",
+            activity           : "androidx.activity:activity-ktx:1.2.2",
+            fragment           : "androidx.fragment:fragment-ktx:1.3.3",
             appcompat          : "androidx.appcompat:appcompat:1.2.0",
             kotlin_stdlib      : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
             material           : "com.google.android.material:material:1.3.0",
@@ -45,7 +47,12 @@ ext {
             ml_custom          : 'com.google.mlkit:image-labeling-custom:16.3.1',
             work               : "androidx.work:work-runtime-ktx:$work_version",
             share_anim         : "com.github.yellowcath:YcShareElement:1.3.2.x",
-            image_viewer       : "com.github.stfalcon:stfalcon-imageviewer:1.0.1"
+            image_viewer       : "com.github.stfalcon:stfalcon-imageviewer:1.0.1",
+            image_checker      : "com.github.LuckSiege.PictureSelector:picture_library:v2.6.1",
+            seekbar            : 'com.github.warkiz.widget:indicatorseekbar:2.1.2',
+            lottie             : 'com.airbnb.android:lottie:3.7.0',
+            switch_button      : 'com.kyleduo.switchbutton:library:2.0.3',
+            web_view           : 'cn.yc:WebViewLib:1.4.0'
     ]
 
     testDepend = [

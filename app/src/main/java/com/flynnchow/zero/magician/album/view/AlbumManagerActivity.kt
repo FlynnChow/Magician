@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.flynnchow.zero.common.activity.BindingActivity
+import com.flynnchow.zero.common.activity.MagicianActivity
 import com.flynnchow.zero.component.dialog.DeleteDialog
 import com.flynnchow.zero.component.dialog.EditDialog
 import com.flynnchow.zero.magician.R
@@ -17,7 +17,7 @@ import com.flynnchow.zero.magician.album.viewmodel.AlbumManagerViewModel
 import com.flynnchow.zero.magician.databinding.ActivityAlbumManagerBinding
 
 class AlbumManagerActivity :
-    BindingActivity<ActivityAlbumManagerBinding>(R.layout.activity_album_manager) {
+    MagicianActivity<ActivityAlbumManagerBinding>(R.layout.activity_album_manager) {
     private val titleAdapter = AlbumTitleAdapter(this)
     private val titleTouchHelper = ItemTouchHelper(AlbumTitleTouchHelper(titleAdapter))
     private var lastFragment: Fragment? = null
@@ -69,22 +69,22 @@ class AlbumManagerActivity :
             checkEmptyState()
         })
         albumManagerViewModel.newData.observe(this, {
+            mBinding.titleListView.scrollToPosition(titleAdapter.itemCount - 1)
             titleAdapter.insertAlbum(it)
             it.position = titleAdapter.itemCount - 1
             val oldPosition = titleAdapter.checkPosition
             titleAdapter.checkPosition = it.position
-            if (oldPosition > 0) {
+            if (oldPosition >= 0) {
                 titleAdapter.notifyItemChanged(oldPosition)
             }
             titleAdapter.notifyItemChanged(titleAdapter.checkPosition)
-            mBinding.titleListView.scrollToPosition(titleAdapter.itemCount)
             if (titleAdapter.itemCount > 1) {
                 switchFragment(it.fragment)
             }
             checkEmptyState()
         })
         albumViewModel.tagData.observe(this, {
-            titleAdapter.insertAlbum(it)
+            titleAdapter.initAlbum(it)
             checkEmptyState()
             albumManagerViewModel.initAlbumTitle(titleAdapter.data)
         })

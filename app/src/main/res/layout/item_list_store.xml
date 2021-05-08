@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewData"
+            type="com.flynnchow.zero.magician.store.viewdata.StoreViewData" />
+    </data>
+
+    <LinearLayout
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="48dp"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            tools:text="名字"
+            android:text="@{viewData.data.title}"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/font_black_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            tools:text="2020-1999"
+            android:text="@{viewData.data.dateTime}"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/font_black_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.cardview.widget.CardView
+            app:cardElevation="0dp"
+            app:cardCornerRadius="4dp"
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+            <ImageView
+                app:img="@{viewData.uri}"
+                android:transitionName="storeImage"
+                android:id="@+id/image"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>

@@ -34,6 +34,10 @@ interface StoreModelDao {
     @Query("DELETE FROM store_model")
     suspend fun clear()
 
-    @Query("SELECT * FROM store_model")
+    @Query("SELECT * FROM store_model ORDER BY create_date DESC")
     suspend fun getData():List<StoreModel>
+
+
+    @Query("SELECT * FROM store_model WHERE id = :id ORDER BY create_date DESC")
+    suspend fun getData(id:Int):List<StoreModel>
 }

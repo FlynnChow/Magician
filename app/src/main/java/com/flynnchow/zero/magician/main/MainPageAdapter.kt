@@ -12,7 +12,7 @@ import com.flynnchow.zero.magician.R
 import com.flynnchow.zero.magician.album.view.PhotoAlbumFragment
 import com.flynnchow.zero.magician.databinding.ActivityMainBinding
 import com.flynnchow.zero.magician.gallery.view.GalleryFragment
-import com.flynnchow.zero.magician.store.StoreFragment
+import com.flynnchow.zero.magician.store.view.StoreFragment
 
 class MainPageAdapter(
     private val fragmentManager: FragmentManager,

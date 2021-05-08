@@ -34,14 +34,14 @@
                     <ImageView
                         android:id="@+id/gallery_sort"
                         android:layout_marginStart="8dp"
-                        android:padding="2dp"
+                        android:padding="4dp"
                         android:src="@drawable/layout_3"
                         android:layout_width="24dp"
                         android:layout_height="24dp"/>
                     <ImageView
                         android:id="@+id/gallery_setting"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="12dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="16dp"
                         android:padding="3dp"
                         android:src="@drawable/setting"
                         android:layout_width="24dp"

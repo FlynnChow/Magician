@@ -1,15 +1,13 @@
 package com.flynnchow.zero.magician.gallery.view
 
 import android.os.Bundle
-import androidx.lifecycle.Observer
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.flynnchow.zero.base.helper.LogDebug
-import com.flynnchow.zero.common.fragment.BindingFragment
+import com.flynnchow.zero.common.fragment.MagicianFragment
 import com.flynnchow.zero.magician.R
 import com.flynnchow.zero.magician.base.helper.TitleFontHelper
 import com.flynnchow.zero.magician.base.provider.MediaProvider
-import com.flynnchow.zero.magician.base.work.ImageAsyncWorker
 import com.flynnchow.zero.magician.databinding.FragmentGalleryBinding
 import com.flynnchow.zero.magician.gallery.GalleryType
 import com.flynnchow.zero.magician.gallery.adapter.GalleryMainAdapter
@@ -19,7 +17,7 @@ import com.google.android.material.transition.platform.MaterialContainerTransfor
 import com.google.android.material.transition.platform.MaterialFadeThrough
 
 
-class GalleryFragment : BindingFragment<FragmentGalleryBinding>(R.layout.fragment_gallery) {
+class GalleryFragment : MagicianFragment<FragmentGalleryBinding>(R.layout.fragment_gallery) {
     private val galleryViewModel by lazy {
         getViewModel(GalleryViewModel::class.java)
     }
@@ -28,6 +26,7 @@ class GalleryFragment : BindingFragment<FragmentGalleryBinding>(R.layout.fragmen
     }
 
     override fun onInitView() {
+        (mBinding.galleyRecyclerView.itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
         mBinding.galleyRecyclerView.adapter = adapter
         mBinding.galleyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         mBinding.gallerySort.setOnClickListener {
@@ -46,6 +45,26 @@ class GalleryFragment : BindingFragment<FragmentGalleryBinding>(R.layout.fragmen
                 }
             }
             adapter.notifyItemRangeChanged(0, adapter.itemCount)
+        }
+        mBinding.gallerySetting.setOnClickListener {
+            val popup = PopupMenu(requireContext(), mBinding.gallerySetting)
+            popup.menuInflater.inflate(R.menu.gallery_config, popup.menu)
+
+            popup.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.gallery_edit -> {
+
+                    }
+                    R.id.gallery_all_select -> {
+
+                    }
+                }
+                true
+            }
+            popup.setOnDismissListener {
+
+            }
+            popup.show()
         }
         TitleFontHelper.updateTitleFont(mBinding.title)
     }

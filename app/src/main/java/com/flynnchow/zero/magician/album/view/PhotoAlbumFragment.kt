@@ -9,7 +9,7 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
-import com.flynnchow.zero.common.fragment.BindingFragment
+import com.flynnchow.zero.common.fragment.MagicianFragment
 import com.flynnchow.zero.magician.R
 import com.flynnchow.zero.magician.album.adapter.PhotoAlbumAdapter
 import com.flynnchow.zero.magician.album.viewdata.PhotoAlbumViewModel
@@ -25,10 +25,9 @@ import com.google.android.material.transition.platform.MaterialFadeThrough
 import com.hw.ycshareelement.YcShareElement
 import com.hw.ycshareelement.transition.IShareElements
 import com.hw.ycshareelement.transition.ShareElementInfo
-import com.hw.ycshareelement.transition.TextViewStateSaver
 
 
-class PhotoAlbumFragment : BindingFragment<FragmentAlbumBinding>(R.layout.fragment_album) {
+class PhotoAlbumFragment : MagicianFragment<FragmentAlbumBinding>(R.layout.fragment_album) {
     private val pageAdapter by lazy { PhotoAlbumAdapter(requireActivity()) }
     private val mViewModel by lazy { getViewModel(PhotoAlbumViewModel::class.java) }
 

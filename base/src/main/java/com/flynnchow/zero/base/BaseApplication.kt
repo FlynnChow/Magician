@@ -2,6 +2,7 @@ package com.flynnchow.zero.base
 
 import android.app.Application
 import androidx.annotation.CallSuper
+import com.ycbjie.webviewlib.utils.X5WebUtils
 
 abstract class BaseApplication:Application() {
     companion object{
@@ -12,5 +13,6 @@ abstract class BaseApplication:Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        X5WebUtils.init(this)
     }
 }

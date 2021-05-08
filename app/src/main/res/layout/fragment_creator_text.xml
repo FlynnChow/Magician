@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.flynnchow.zero.magician.video_create.viewmodel.VideoConfigViewModel" />
+    </data>
+    <LinearLayout
+        tools:background="@color/creator_bottom_background"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:text="视频标题"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:layout_marginTop="16dp"
+            android:text="@={viewModel.titleText}"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:id="@+id/title_edit"
+            android:theme="@style/VideoEdit"
+            android:maxLines="20"
+            android:layout_marginEnd="40dp"
+            android:singleLine="true"
+            android:textCursorDrawable="@drawable/shape_video_edit"
+            android:layout_marginStart="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</layout>

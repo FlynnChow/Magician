@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="drawable"
+            type="android.graphics.drawable.Drawable" />
+        <variable
+            name="activity"
+            type="com.flynnchow.zero.magician.main.MainActivity" />
+    </data>
+
+    <LinearLayout
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginTop="16dp"
+        android:background="@{drawable}"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include
+                app:activity="@{activity}"
+                app:drawable="@{@drawable/video}"
+                app:name="@{`视频`}"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                layout="@layout/item_func"/>
+            <include
+                app:activity="@{activity}"
+                app:drawable="@{@drawable/video_album}"
+                app:name="@{`影集`}"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/item_func"/>
+            <include
+                app:activity="@{activity}"
+                app:drawable="@{@drawable/yun}"
+                app:name="@{`网盘`}"
+                android:layout_marginStart="6dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/item_func"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

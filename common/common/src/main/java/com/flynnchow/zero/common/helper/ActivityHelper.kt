@@ -22,6 +22,16 @@ class ActivityHelper(
             }
             activityTask.clear()
         }
+
+        @JvmStatic
+        fun clearTask(currentActivity: Activity) {
+            for (activity in activityTask) {
+                if (activity.get()?.javaClass != currentActivity.javaClass){
+                    activity.get()?.finish()
+                }
+            }
+            activityTask.clear()
+        }
     }
     private var activityRef: WeakReference<Activity> = WeakReference(context)
 

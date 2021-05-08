@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:id="@+id/decoder_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            android:visibility="gone"
+            android:id="@+id/empty_view"
+            layout="@layout/panel_empty"/>
+    </FrameLayout>
+</layout>

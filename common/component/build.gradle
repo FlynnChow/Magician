@@ -12,4 +12,7 @@ dependencies {
     api (depend.viewmodel2)
     api (depend.toast)
     api (depend.loading)
+    api (depend.seekbar)
+    api (depend.lottie)
+    api (depend.switch_button)
 }

@@ -34,6 +34,9 @@ interface StoreVideoDao {
     @Query("DELETE FROM store_video")
     suspend fun clear()
 
-    @Query("SELECT * FROM store_video")
+    @Query("SELECT * FROM store_video ORDER BY createDate DESC")
     suspend fun getData():List<StoreVideo>
+
+    @Query("SELECT * FROM store_video WHERE id = :id ORDER BY createDate DESC")
+    suspend fun getData(id:Int):List<StoreVideo>
 }

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.flynnchow.zero.magician.store.viewmodel.StoreViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:background="@color/store_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".store.view.StoreActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:fitsSystemWindows="true"
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorOnPrimary">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:fitsSystemWindows="true"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:elevation="0dp"
+                android:background="@color/store_background"
+                app:contentScrim="?attr/colorOnPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:statusBarScrim="@android:color/transparent">
+
+                <FrameLayout
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.7"
+                    android:fitsSystemWindows="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp">
+                    <ImageView
+                        android:id="@+id/store_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@{viewModel.store.image}"
+                        android:transitionName="storeImage" />
+                    <LinearLayout
+                        android:onClick="@{()->viewModel.videoClick()}"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="bottom|end"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:paddingBottom="4dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:background="@drawable/shape_store_video"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            tools:src="@drawable/video_player"
+                            android:src="@{viewModel.store.createVideo?@drawable/video_player:@drawable/video_create}"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp" />
+
+                        <TextView
+                            tools:text="制作电影"
+                            android:layout_marginStart="8dp"
+                            android:textSize="12sp"
+                            android:textColor="@color/white"
+                            android:text="@{viewModel.store.createVideo?`播放影集`:`制作影集`}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </FrameLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    app:layout_collapseMode="pin">
+
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/ripple_oval"
+                        android:clickable="true"
+                        android:padding="4dp"
+                        android:src="@drawable/back"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/menu"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:padding="3dp"
+                            android:src="@drawable/setting" />
+                    </FrameLayout>
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <LinearLayout
+                android:orientation="vertical"
+                android:paddingBottom="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:paddingTop="20dp"
+                    android:paddingEnd="20dp"
+                    android:paddingStart="20dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        tools:text="标题"
+                        android:text="@{viewModel.store.title}"
+                        android:textColor="@color/font_black_1"
+                        android:textStyle="bold"
+                        android:textSize="24sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        tools:text="2020-12-20"
+                        android:text="@{viewModel.store.dateTime}"
+                        android:layout_marginTop="20dp"
+                        android:textSize="13sp"
+                        android:textColor="@color/font_black_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <View
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/line_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:text="照片"
+                            android:textSize="12sp"
+                            android:textColor="@color/font_black_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="4dp"
+                            android:text="@{viewModel.store.imageCount}"
+                            android:textColor="@color/font_black_1"
+                            android:textSize="12sp"
+                            android:textStyle="italic"
+                            tools:text="8" />
+                        <TextView
+                            android:text="影集"
+                            android:layout_marginStart="20dp"
+                            android:textSize="12sp"
+                            android:textColor="@color/font_black_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            tools:text="未创建"
+                            android:text="@{viewModel.store.createVideo?`已创建`:`未创建`}"
+                            android:textStyle="italic"
+                            android:layout_marginStart="6dp"
+                            android:textSize="12sp"
+                            android:textColor="@color/font_black_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="40dp"
+                        android:background="@color/line_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:overScrollMode="never"
+                    android:id="@+id/list_view"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

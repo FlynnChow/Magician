@@ -37,13 +37,15 @@ class ClassificationAdapter(private val target: String) :
     }
 
     suspend fun addData(medias: List<MediaModel>) {
-        val addedIndex = itemCount
-        data.addAll(medias.filter {
+        val targetList = medias.filter {
             MLKitHelper.isHitLabel(it,target)
         }.map {
             ClassificationData(it)
-        }.toList())
-        notifyItemRangeInserted(addedIndex, medias.size)
+        }
+        withContext(Dispatchers.Main){
+            data.addAll(targetList)
+            notifyDataSetChanged()
+        }
     }
 
     suspend fun initData(medias: List<MediaModel>) {

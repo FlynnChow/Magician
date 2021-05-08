@@ -55,15 +55,17 @@ class MLKitManager {
     private lateinit var mlKitLabeler: ImageLabeler
 
     suspend fun doAsync(data: MediaModel, callback: (MediaModel?) -> Unit) {
-        val labelList = ArrayList<MlLabel>()
-        val inputData = data.clone()
-        try {
-            val image = InputImage.fromFilePath(BaseApplication.instance, inputData.getUri())
-            asyncToMLKit(image, labelList) {
-                onAsyncResult(inputData, labelList, callback)
+        withContext(Dispatchers.Default){
+            val labelList = ArrayList<MlLabel>()
+            val inputData = data.clone()
+            try {
+                val image = InputImage.fromFilePath(BaseApplication.instance, inputData.getUri())
+                asyncToMLKit(image, labelList) {
+                    onAsyncResult(inputData, labelList, callback)
+                }
+            } catch (e: Exception) {
+                onAsyncResult(inputData, null, callback)
             }
-        } catch (e: Exception) {
-            onAsyncResult(inputData, null, callback)
         }
     }
 

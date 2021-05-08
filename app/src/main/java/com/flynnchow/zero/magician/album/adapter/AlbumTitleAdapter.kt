@@ -59,12 +59,17 @@ class AlbumTitleAdapter(private val owner: LifecycleOwner) :
         val addIndex = itemCount
         data.add(viewData)
         notifyItemInserted(addIndex)
+        notifyItemRangeChanged(addIndex - 1, addIndex)
     }
 
     fun insertAlbum(albums: List<MLPhotoAlbum>) {
         for (album in albums) {
             insertAlbum(album)
         }
+    }
+
+    fun initAlbum(albums: List<MLPhotoAlbum>){
+        insertAlbum(albums)
     }
 
     fun removeAlbum(albums: List<MLPhotoAlbum>) {
@@ -89,7 +94,7 @@ class AlbumTitleAdapter(private val owner: LifecycleOwner) :
                 data.removeAt(index)
                 notifyItemRemoved(index)
                 notifyItemRangeRemoved(index, itemCount - index)
-                if (default != checkPosition){
+                if (default != checkPosition) {
                     val nextData = data[checkPosition]
                     nextData.position = checkPosition
                     notifyItemChanged(checkPosition)

@@ -75,7 +75,6 @@ class VideoCreatorViewModel : BaseViewModel() {
             if(it !is CancelEvent){
                 showToast(it.message ?: "")
             }
-            delay(10000)
         }, {
             this.ffmpeg = null
             if (_progress.value == true){

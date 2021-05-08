@@ -3,8 +3,10 @@ package com.flynnchow.zero.video_codec
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
+import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.flynnchow.zero.base.BaseApplication
 import com.flynnchow.zero.base.helper.LogDebug
 import com.flynnchow.zero.base.util.FileUtils
 import com.flynnchow.zero.model.StoreVideo
@@ -12,6 +14,8 @@ import io.microshow.rxffmpeg.RxFFmpegInvoke
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.FileInputStream
+import java.io.InputStream
 import java.lang.Exception
 import kotlin.math.roundToInt
 
@@ -166,12 +170,19 @@ class FFmpeg(context: Context, private val config: FFmpegHelper.FFmpegConfig) :
             commands.add("-i")
             commands.add(path)
             commands.add("-vf")
-//            if (config.effect == EffectProvider.Effect_0 || config.effect == EffectProvider.Effect_1) {
-//                commands.add("setsar=sar=1/1[a];[a]scale=1080:1080*ih/iw[c];[c]crop=1080:1080")
-//            } else {
-//                commands.add("setsar=sar=1/1[a],[a]scale=1080:1080*ih/iw,pad=1080:1920:0:960:black")
-//            }
-            commands.add("setsar=sar=72/72")
+            val degree = getUriOrientation(path)
+            val rotate = when(degree){
+                90 -> "rotate=PI/2,"
+                180 -> "rotate=PI,"
+                270 -> "rotate=PI/2*3,"
+                else -> ""
+            }
+            if (config.effect == EffectProvider.effect_0 || config.effect == EffectProvider.effect_1) {
+                commands.add("${rotate}scale=1080:1080*ih/iw,crop='min(iw,ih)':'min(iw,ih)',setsar=sar=1/1")
+            } else {
+                commands.add("${rotate}scale=1080:1080*ih/iw,pad=1080:1920:0:(oh-ih)/2:black,setsar=sar=1/1")
+            }
+//            commands.add("${rotate}setsar=sar=72/72")
             commands.add(outPath)
             result.add(outPath)
             RxFFmpegInvoke.getInstance().runCommand(commands.toTypedArray(), this@FFmpeg)
@@ -370,6 +381,31 @@ class FFmpeg(context: Context, private val config: FFmpegHelper.FFmpegConfig) :
 
     override fun onCancel() {
 
+    }
+
+    private fun getUriOrientation(uri: String): Int {
+        var inStream: InputStream? = null
+        return try {
+            inStream = FileInputStream(uri)
+            if (inStream != null) {
+                val exif = ExifInterface(inStream)
+                val orientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL
+                )
+                when (orientation) {
+                    ExifInterface.ORIENTATION_ROTATE_90 -> 90
+                    ExifInterface.ORIENTATION_ROTATE_180 -> 180
+                    ExifInterface.ORIENTATION_ROTATE_270 -> 270
+                    else -> 0
+                }
+            } else
+                0
+        } catch (e: Exception) {
+            0
+        } finally {
+            inStream?.close()
+        }
     }
 
     override fun onError(message: String?) {

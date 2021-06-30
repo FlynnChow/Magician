@@ -75,7 +75,6 @@ class StoreFragment : MagicianFragment<FragmentStoreBinding>(R.layout.fragment_s
             checkEmptyState()
         })
         storeViewModel.delete.observe(this, {
-            LogDebug("测试","update")
             adapter.removeData(it)
             checkEmptyState()
         })

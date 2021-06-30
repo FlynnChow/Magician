@@ -61,7 +61,11 @@ class MLKitManager {
             try {
                 val image = InputImage.fromFilePath(BaseApplication.instance, inputData.getUri())
                 asyncToMLKit(image, labelList) {
-                    onAsyncResult(inputData, labelList, callback)
+                    if (it){
+                        onAsyncResult(inputData, labelList, callback)
+                    }else{
+                        onAsyncResult(inputData, null, callback)
+                    }
                 }
             } catch (e: Exception) {
                 onAsyncResult(inputData, null, callback)
@@ -72,7 +76,7 @@ class MLKitManager {
     private fun asyncToMLKit(
         srcImage: InputImage,
         result: ArrayList<MlLabel>,
-        callback: () -> Unit
+        callback: (success:Boolean) -> Unit
     ) {
         mlKitLabeler.process(srcImage)
             .addOnSuccessListener { labels ->
@@ -86,14 +90,14 @@ class MLKitManager {
                 asyncToImageNet(srcImage, result, callback)
             }
             .addOnFailureListener { e ->
-                throw Exception("ML-KIT-ERROR")
+                callback(false)
             }
     }
 
     private fun asyncToImageNet(
         srcImage: InputImage,
         result: ArrayList<MlLabel>,
-        callback: () -> Unit
+        callback: (success:Boolean) -> Unit
     ) {
         imageNetLabeler.process(srcImage)
             .addOnSuccessListener { labels ->
@@ -104,10 +108,10 @@ class MLKitManager {
                     val mlLabel = MlLabel(label.index, tag, label.confidence, ML_MODEL_IMAGE_NET)
                     result.add(mlLabel)
                 }
-                callback()
+                callback(true)
             }
             .addOnFailureListener { e ->
-                throw Exception("ML-KIT-ERROR")
+                callback(false)
             }
     }
 

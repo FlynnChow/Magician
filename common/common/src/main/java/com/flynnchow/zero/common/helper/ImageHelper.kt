@@ -30,7 +30,7 @@ object ImageHelper {
 
     private const val mediumSize = 450
 
-    private const val highSize = 1000
+    private const val highSize = 600
 
     @JvmStatic
     @BindingAdapter("res")

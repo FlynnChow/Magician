@@ -106,7 +106,7 @@ class MediaProvider {
     suspend fun doAsyncImageWork() {
         updateExifInfo() //更新文件信息
         ImageAsyncWorker.instance.doLaunchImageAsync() //图像识别文件
-//        BaiduUploadWorker.doAutoUploadWork()
+        BaiduUploadWorker.doAutoUploadWork()
     }
 
     private fun updateExifInfo() {

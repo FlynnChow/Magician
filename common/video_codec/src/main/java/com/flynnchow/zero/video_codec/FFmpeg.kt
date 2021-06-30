@@ -171,18 +171,18 @@ class FFmpeg(context: Context, private val config: FFmpegHelper.FFmpegConfig) :
             commands.add(path)
             commands.add("-vf")
             val degree = getUriOrientation(path)
-            val rotate = when(degree){
+            val rotate = when (degree) {
                 90 -> "rotate=PI/2,"
                 180 -> "rotate=PI,"
                 270 -> "rotate=PI/2*3,"
                 else -> ""
             }
             if (config.effect == EffectProvider.effect_0 || config.effect == EffectProvider.effect_1) {
-                commands.add("${rotate}scale=1080:1080*ih/iw,crop='min(iw,ih)':'min(iw,ih)',setsar=sar=1/1")
+//                commands.add("${rotate}scale=1080:1080*ih/iw,crop='min(iw,ih)':'min(iw,ih)',setsar=sar=1/1")
+                commands.add("${rotate}setsar=sar=72/72")
             } else {
                 commands.add("${rotate}scale=1080:1080*ih/iw,pad=1080:1920:0:(oh-ih)/2:black,setsar=sar=1/1")
             }
-//            commands.add("${rotate}setsar=sar=72/72")
             commands.add(outPath)
             result.add(outPath)
             RxFFmpegInvoke.getInstance().runCommand(commands.toTypedArray(), this@FFmpeg)
